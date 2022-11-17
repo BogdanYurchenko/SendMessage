@@ -1,0 +1,38 @@
+<?php
+    ini_set('error_reporting', E_ALL);
+    ini_set('display_errors' , 1);
+    ini_set('display_startup_errors', 1);
+
+    //https://api.telegram.org/bot5646587411:AAH6qfL1AU-smQLf5kN-iQbJevPnDVe5OHY/getMe
+
+    define("TG_TOKEN", "5787186565:AAHuhwGvpDo7ZBgRMf08S67Q7IsgLeEELFY");
+    define("TG_USER_ID", 1250279205);
+
+    function vardump($str)
+    {
+        echo "<pre>";
+        var_dump($str);
+        echo "</pre>";
+    }
+
+
+    //отправляет текстовое сообщение боту
+    $getQuery = array
+    (
+        "chat_id" => TG_USER_ID,
+        "text" => "Новое сообщение из урока 3",
+        "parse_mode" => "html",
+    );
+
+    $ch = curl_init("https://api.telegram.org/bot" . TG_TOKEN . "/sendMessage?" . http_build_query($getQuery));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_HEADER, false);
+
+    $resultQuery = curl_exec($ch);
+    curl_close($ch);
+
+    echo $resultQuery;
+
+    $textMessage = "Текстовое сообщение";
+    $textMessage = urlencode($textMessage);
